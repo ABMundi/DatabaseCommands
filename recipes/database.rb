@@ -1,17 +1,21 @@
 namespace :db do
   require 'inifile'
-  desc "Backup the remote production database" 
-  task :backup, :roles => :db, :only => { :primary => true } do 
-    filename = "#{Time.now.to_i}.sql.bz2" 
-    file = "app/tmp/#{filename}" 
-    param = IniFile::load('app/config/parameters.ini')
-    
-    puts param['parameters']['database_name']
 
-    #run "cd #{latest_release} && mysqldump -u #{db['username']} --password=#{db['password']} #{db['database']} | bzip2 -c > #{file}" do |ch, stream, data| 
-    #  puts data 
-    #end 
-    #run "mkdir -p #{File.dirname(__FILE__)}/../backups/"
-    #get file, "backups/#{filename}" 
+  desc "Init dump folders" 
+  task :init, :roles => :db, :only => { :primary => true } do 
+    run "cd #{latest_release} && mkdir app/tmp"
+    run "cd #{latest_release} && mkdir app/tmp/dump"
+    run "cd #{latest_release} && chmod -R 777 app/tmp"
+  end
+
+  desc "Create a dump of db in remote server" 
+  task :dump, :roles => :db, :only => { :primary => true } do 
+    run "cd #{latest_release} && #{php_bin} #{symfony_console} db:dump --env=#{symfony_env_prod}"
+  end
+
+  desc "Download file in local folder" 
+  task :download, :roles => :db, :only => { :primary => true } do 
+    #param = IniFile::load('app/config/parameters.ini')
+    run "cp #{latest_release}/app/tmp/dump/current.sql.bz2 #{latest_release}/web/dbcurrent.sql.bz2"
   end
 end
