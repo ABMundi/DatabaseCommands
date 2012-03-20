@@ -7,16 +7,20 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Command that dumps
+ */
 class DatabaseDumpCommand extends ContainerAwareCommand
 {
-
+    /**
+     * This method set name and description 
+     */
     protected function configure()
     {
         parent::configure();
         $this
             ->setName('db:dump')
-            ->setDescription('This task dump the database in a file')
-        ;
+            ->setDescription('This task dump the database in a file');
     }
 
     /**
@@ -31,23 +35,25 @@ class DatabaseDumpCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $dump_dir = "app/tmp/dump";
+        $directory = "app/tmp/dump";
         $link = "app/tmp/dump/current.sql.bz2";
-        if (!is_dir($dump_dir)) {
-            mkdir($dump_dir);
+        if (!is_dir($directory)) {
+            mkdir($directory);
         }
+
         $filename = date('YmdHis').'.sql.bz2';
-        $tofile = "$dump_dir/$filename";
-        $db_name = $this->getContainer()->getParameter('database_name');
-        $db_user = $this->getContainer()->getParameter('database_user');
-        $db_pwd = $this->getContainer()->getParameter('database_password');
-        //exec("mysqldump -u $db_user --password=$db_pwd $db_name | bzip2 -c > #{file}");
+        $toFile = "$directory/$filename";
+        $dbName = $this->getContainer()->getParameter('database_name');
+        $dbUser = $this->getContainer()->getParameter('database_user');
+        $dbPwd = $this->getContainer()->getParameter('database_password');
+
         $time = new \DateTime();
         if (file_exists($link)) {
             unlink($link);
         }
-        exec("mysqldump -u $db_user --password=$db_pwd $db_name | bzip2 -c > $tofile");
-        exec("ln -f $tofile $link");
-        $output->writeln("Dumped $db_name in $tofile in ". $time->diff($time = new \DateTime())->format('%s seconds'));
+
+        exec("mysqldump -u $dbUser --password=$dbPwd $dbName | bzip2 -c > $toFile");
+        exec("ln -f $toFile $link");
+        $output->writeln("Dumped $dbName in $toFile in ". $time->diff($time = new \DateTime())->format('%s seconds'));
     }
 }

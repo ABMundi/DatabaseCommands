@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Abmundi" default="build">
+    <target name="soundcheck" 
+            description="Check the requirements">
+    </target>
+
+    <target name="phpcs"
+            description="Symfony2 coding standard">
+        <phpcodesniffer
+            standard="Symfony2"
+            format="full"
+            allowedFileExtensions="php">
+            <fileset dir=".">
+                <include name="**/*.php" />
+            </fileset>
+        </phpcodesniffer>
+    </target>
+
+</project>
