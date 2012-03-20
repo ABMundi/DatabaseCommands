@@ -50,7 +50,7 @@ Now from your console you can run
 
     ./app/console db:dump
 
-and see that a new file has been saved in folder /app/fmp/dump with an hard link to the newest one.
+and see that a new file has been saved in folder /app/tmp/dump with an hard link to the newest one.
 
 ## Capifony ##
 
