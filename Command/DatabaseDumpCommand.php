@@ -32,7 +32,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $dump_dir = "app/tmp/dump";
-        $link = "app/tmp/dump/current";
+        $link = "app/tmp/dump/current.sql.bz2";
         if (!is_dir($dump_dir)) {
             mkdir($dump_dir);
         }
