@@ -54,7 +54,7 @@ and see that a new file has been saved in folder /app/fmp/dump with an hard link
 
 ## Capifony ##
 
-If you have installed capifony this bundle provides to you 6 nice tasks:
+If you have installed capifony (http://capifony.org/) this bundle provides to you 6 nice tasks:
 
 * cap db:init - Set remote folders (run it first time)
 * cap db:dump - Create a dump of db in remote folder
