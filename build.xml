@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="Abmundi" default="build">
-    <target name="soundcheck" 
-            description="Check the requirements">
-    </target>
-
     <target name="phpcs"
             description="Symfony2 coding standard">
         <phpcodesniffer
@@ -16,5 +12,4 @@
             </fileset>
         </phpcodesniffer>
     </target>
-
 </project>
