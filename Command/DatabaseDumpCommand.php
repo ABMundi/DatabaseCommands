@@ -47,7 +47,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
             unlink($link);
         }
         exec("mysqldump -u $db_user --password=$db_pwd $db_name | bzip2 -c > $tofile");
-        exec("ln -s -f $tofile $link");
+        exec("ln -f $tofile $link");
         $output->writeln("Dumped $db_name in $tofile in ". $time->diff($time = new \DateTime())->format('%s seconds'));
     }
 }
