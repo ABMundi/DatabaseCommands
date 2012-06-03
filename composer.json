@@ -4,6 +4,7 @@
     "description": "Provides a series of database commands for your Symfony application, one for the console and 5 capifony tasks.",
     "keywords": ["database", "mysql", "doctrine", "backup", "capifony"],
     "homepage": "https://github.com/ABMundi/DatabaseCommands",
+    "license": "MIT",
     "authors": [
         {
             "name": "Fabio Fabbrucci",
