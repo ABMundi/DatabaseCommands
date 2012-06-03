@@ -5,6 +5,24 @@ It provides one command line for our console, and 5 capifony tasks.
 
 ## Installation ##
 
+### Step 1
+
+#### Using Composer
+
+Add the following code to your composer.json:
+
+    "require": {
+        ...
+        "abmundi/database-commands-bundle": "dev-master",
+        ...
+    },
+
+Run a Composer update
+
+    $ php composer.phar update
+
+#### Using vendor deps
+
 Add the following code to your deps file:
 
     [ABMundiDatabaseCommandsBundle]
@@ -15,7 +33,17 @@ And then run the vendors install command:
 
     $ ./bin/vendors install
 
-Then register the bundle in the `AppKernel.php` file:
+Then register the autoloader in the `autoload.php` file:
+
+    $loader->registerNamespaces(array(
+        ...
+        'Abmundi'                       => __DIR__.'/../vendor/bundles',
+        ...
+    ));
+
+### Step 2
+
+Register the bundle in the `AppKernel.php` file:
 
     public function registerBundles()
     {
@@ -27,14 +55,6 @@ Then register the bundle in the `AppKernel.php` file:
 
         return $bundles;
     }
-
-Then register the autoloader in the `autoload.php` file:
-
-    $loader->registerNamespaces(array(
-        ...
-        'Abmundi'                       => __DIR__.'/../vendor/bundles',
-        ...
-    ));
 
 ## Requirements ##
 
